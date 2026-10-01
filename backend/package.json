@@ -1,0 +1,24 @@
+{
+  "name": "gesture-control-backend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch server.js",
+    "start": "node server.js",
+    "db:check": "node scripts/checkDatabase.mjs",
+    "db:migrate-json": "node scripts/migrateJsonToMongo.mjs"
+  },
+  "dependencies": {
+    "axios": "latest",
+    "bcryptjs": "latest",
+    "cors": "latest",
+    "dotenv": "latest",
+    "express": "latest",
+    "express-rate-limit": "^8.7.0",
+    "helmet": "^8.3.0",
+    "jsonwebtoken": "latest",
+    "mongodb": "^7.7.0",
+    "nanoid": "latest"
+  }
+}

@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: gesture-control-backend
+    runtime: node
+    rootDir: backend
+    plan: free
+    region: frankfurt
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATA_STORE
+        value: mongodb
+      - key: MONGODB_DATABASE
+        value: gesture_control
+      - key: TRUST_PROXY
+        value: "true"
+      - key: RATE_LIMIT_WINDOW_MS
+        value: "900000"
+      - key: RATE_LIMIT_MAX
+        value: "600"
+      - key: REQUEST_TIMEOUT_MS
+        value: "6000"
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: CORS_ORIGIN
+        sync: false
+      - key: ALLOWED_TARGET_HOSTS
+        sync: false
+
