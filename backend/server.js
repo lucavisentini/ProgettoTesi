@@ -7,7 +7,18 @@ import { apiRoutes } from "./routes/apiRoutes.js";
 import { authRoutes } from "./routes/authRoutes.js";
 import { store } from "./repositories/dataStore.js";
 
-await store.init();
+let storeStartupError = null;
+
+store.init().catch((error) => {
+  storeStartupError = {
+    name: error.name,
+    message: error.message,
+    code: error.code,
+    reason: error.reason
+  };
+
+  console.error("Database startup failed:", error);
+});
 
 const app = express();
 
@@ -68,7 +79,10 @@ app.get("/health", (_req, res) => {
   res.json({
     ok: true,
     service: "gesture-control-backend",
-    storage: store.getStatus()
+    storage: {
+      ...store.getStatus(),
+      startupError: storeStartupError
+    }
   });
 });
 
